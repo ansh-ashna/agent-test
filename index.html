@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Ansh — Computer Science Student</title>
+  <meta
+    name="description"
+    content="Portfolio website of Ansh, a third-year Computer Science Engineering student."
+  />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+<style>
+    :root {
+      --black: #080908;
+      --dark: #101210;
+      --card: #151815;
+      --card-hover: #1c211d;
+      --white: #f3f5ef;
+      --muted: #969d94;
+      --green: #caff42;
+      --green-dark: #9fce20;
+      --border: rgba(243, 245, 239, 0.14);
+      --radius: 22px;
+    }
+
+* {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+html {
+      scroll-behavior: smooth;
+    }
+
+body {
+      background: var(--black);
+      color: var(--white);
+      font-family: "Inter", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+      z-index: 20;
+    }
+
+a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+.container {
+      width: min(1160px, calc(100% - 40px));
+      margin: auto;
+    }
+
+.mono {
+      color: var(--green);
+      font-family: "DM Mono", monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      padding: 20px 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(8, 9, 8, 0.95),
+        rgba(8, 9, 8, 0)
+      );
+    }
+
+nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+.logo {
+      color: var(--green);
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: -0.06em;
+    }
+
+.nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+      color: var(--muted);
+      font-family: "DM Mono", monospace;
+      font-size: 0.75rem;
+    }
+
+.nav-links a {
+      transition: color 0.2s ease;
+    }
+
+.nav-links a:hover {
+      color: var(--green);
+    }
+
+.menu-button {
+      display: none;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: transparent;
+      color: var(--green);
+      width: 38px;
+      height: 38px;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+
+.hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 150px 0 100px;
+      position: relative;
+    }
+
+.hero::after {
+      content: "";
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      right: -180px;
+      top: 15%;
+      background: var(--green);
+      opacity: 0.08;
+      filter: blur(130px);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+.hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+    }
+
+.hero h1 {
+      max-width: 880px;
+      margin: 25px 0;
+      font-size: clamp(4rem, 10vw, 9.5rem);
+      font-weight: 500;
+      letter-spacing: -0.09em;
+      line-height: 0.86;
+    }
+
+.serif {
+      font-family: "Instrument Serif", serif;
+      font-style: italic;
+      font-weight: 400;
+    }
+
+.hero h1 span {
+      color: var(--green);
+    }
+
+.hero-description {
+      max-width: 570px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+.hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 35px;
+    }
+
+.button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 19px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      transition: 0.25s ease;
+    }
+
+.button-primary {
+      background: var(--green);
+      color: var(--black);
+      border-color: var(--green);
+    }
+
+.button:hover {
+      transform: translateY(-3px);
+      border-color: var(--green);
+    }
+
+.button-primary:hover {
+      background: var(--green-dark);
+    }
+
+.scroll-note {
+      position: absolute;
+      right: 0;
+      bottom: 38px;
+      color: var(--muted);
+      font-family: "DM Mono", monospace;
+      font-size: 0.7rem;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+
+section {
+      padding: 110px 0;
+    }
+
+.section-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 38px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 20px;
+    }
+
+.section-header h2 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 500;
+      letter-spacing: -0.07em;
+      line-height: 0.9;
+    }
+
+.section-header p {
+      max-width: 300px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+.about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 20px;
+    }
+
+.card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--card);
+      padding: 30px;
+    }
+
+.card h3 {
+      margin-bottom: 14px;
+      color: var(--green);
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+
+.card p {
+      color: var(--muted);
+    }
+
+.skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 25px;
+    }
+
+.skill {
+      padding: 7px 11px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--white);
+      font-family: "DM Mono", monospace;
+      font-size: 0.72rem;
+    }
+
+.projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+.project-card {
+      min-height: 350px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: background 0.25s ease, transform 0.25s ease;
+    }
+
+.project-card:hover {
+      background: var(--card-hover);
+      transform: translateY(-5px);
+    }
+
+.project-number {
+      color: var(--green);
+      font-family: "DM Mono", monospace;
+      font-size: 0.75rem;
+    }
+
+.project-card h3 {
+      margin-top: 55px;
+      color: var(--white);
+      font-size: clamp(1.6rem, 3vw, 2.5rem);
+      letter-spacing: -0.06em;
+    }
+
+.project-card p {
+      max-width: 480px;
+      margin-top: 14px;
+    }
+
+.project-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 35px;
+    }
+
+.tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+.tags span {
+      color: var(--green);
+      font-family: "DM Mono", monospace;
+      font-size: 0.68rem;
+    }
+
+.arrow {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      color: var(--green);
+      font-size: 1.2rem;
+    }
+
+.certificates {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+.certificate {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 20px 22px;
+      border-bottom: 1px solid var(--border);
+    }
+
+.certificate h3 {
+      color: var(--white);
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+.certificate p {
+      margin-top: 4px;
+      color: var(--muted);
+      font-family: "DM Mono", monospace;
+      font-size: 0.68rem;
+    }
+
+.certificate-icon {
+      color: var(--green);
+      font-size: 1.3rem;
+    }
+
+.contact {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: clamp(35px, 7vw, 85px);
+      background: var(--green);
+      color: var(--black);
+    }
+
+.contact::before {
+      content: "LET'S CONNECT";
+      position: absolute;
+      right: -30px;
+      bottom: -34px;
+      color: rgba(0, 0, 0, 0.08);
+      font-size: clamp(4rem, 14vw, 12rem);
+      font-weight: 800;
+      letter-spacing: -0.1em;
+      white-space: nowrap;
+    }
+
+.contact h2 {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 500;
+      letter-spacing: -0.09em;
+      line-height: 0.88;
+    }
+
+.contact-links {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 35px;
+    }
+
+.contact-links a {
+      border: 1px solid rgba(0, 0, 0, 0.3);
+      border-radius: 999px;
+      padding: 11px 16px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+.contact-links a:hover {
+      background: var(--black);
+      color: var(--green);
+    }
+
+footer {
+      padding: 28px 0;
+      color: var(--muted);
+      font-family: "DM Mono", monospace;
+      font-size: 0.7rem;
+    }
+
+@media (max-width: 720px) {
+      .container {
+        width: min(100% - 28px, 1160px);
+      }
+
+.menu-button {
+        display: block;
+      }
+
+.nav-links {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 14px;
+        right: 14px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        padding: 8px 18px;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: var(--card);
+      }
+
+.nav-links.open {
+        display: flex;
+      }
+
+.nav-links li {
+        width: 100%;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+.nav-links li:last-child {
+        border-bottom: 0;
+      }
+
+.hero {
+        min-height: 90vh;
+      }
+
+.hero h1 {
+        font-size: clamp(4rem, 19vw, 7rem);
+      }
+
+.scroll-note {
+        display: none;
+      }
+
+section {
+        padding: 75px 0;
+      }
+
+.section-header {
+        display: block;
+      }
+
+.section-header p {
+        margin-top: 18px;
+      }
+
+.about-grid,
+      .projects-grid,
+      .certificates {
+        grid-template-columns: 1fr;
+      }
+
+.card {
+        padding: 23px;
+      }
+
+.project-card {
+        min-height: 320px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#home" class="logo">ANSH_03</a>
+
+<button class="menu-button" id="menuButton" aria-label="Open navigation">
+          ☰
+        </button>
+
+<ul class="nav-links" id="navLinks">
+          <li><a href="#about">ABOUT</a></li>
+          <li><a href="#projects">PROJECTS</a></li>
+          <li><a href="#certificates">CERTIFICATES</a></li>
+          <li><a href="#contact">CONTACT</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<main>
+    <section class="hero" id="home">
+      <div class="container hero-content">
+        <p class="mono">Computer Science Engineering Student · 03/04</p>
+
+<h1>
+          Building<br />
+          <span class="serif">useful</span> digital
+          <span>things.</span>
+        </h1>
+
+<p class="hero-description">
+          I am a third-year CSE student focused on software development,
+          data analysis, machine learning, and creating practical digital experiences.
+        </p>
+
+<div class="hero-actions">
+          <a class="button button-primary" href="#projects">
+            Explore my work ↗
+          </a>
+
+<a class="button" href="#contact">
+            Let's talk
+          </a>
+        </div>
+      </div>
+
+<div class="container scroll-note">SCROLL TO EXPLORE ↓</div>
+    </section>
+
+<section id="about">
+      <div class="container">
+        <div class="section-header">
+          <h2>About <span class="serif">me.</span></h2>
+          <p>
+            Curious by nature. Constantly learning. Interested in building
+            things that solve real problems.
+          </p>
+        </div>
+
+<div class="about-grid">
+          <article class="card">
+            <p class="mono">01 — Profile</p>
+            <h3>Student, developer, problem solver.</h3>
+            <p>
+              I enjoy turning ideas into working products. My interests include
+              programming, data preprocessing, machine learning, and user-focused
+              web development.
+            </p>
+          </article>
+
+<article class="card">
+            <p class="mono">02 — Toolkit</p>
+            <div class="skills">
+              <span class="skill">C++</span>
+              <span class="skill">Python</span>
+              <span class="skill">HTML</span>
+              <span class="skill">CSS</span>
+              <span class="skill">JavaScript</span>
+              <span class="skill">GitHub</span>
+              <span class="skill">Machine Learning</span>
+              <span class="skill">Data Analysis</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+<section id="projects">
+      <div class="container">
+        <div class="section-header">
+          <h2>Selected <span class="serif">work.</span></h2>
+          <p>Projects where I explored data, models, and useful interfaces.</p>
+        </div>
+
+<div class="projects-grid">
+          <article class="card project-card">
+            <div>
+              <span class="project-number">PROJECT / 01</span>
+
+<h3>Adult Income Preprocessing Model</h3>
+
+<p>
+                A machine learning project for cleaning and preprocessing the
+                Adult Income dataset. The resulting model achieved approximately
+                80% accuracy.
+              </p>
+            </div>
+
+<div class="project-footer">
+              <div class="tags">
+                <span>PYTHON</span>
+                <span>· ML</span>
+                <span>· DATA</span>
+              </div>
+
+<a
+                class="arrow"
+                href="https://github.com/aryan-0307/ADULT-INCOME-PREPROCESSING.git"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="View Adult Income project"
+              >
+                ↗
+              </a>
+            </div>
+          </article>
+
+<article class="card project-card">
+            <div>
+              <span class="project-number">PROJECT / 02</span>
+
+<h3>FIFA 17 Ratings Analysis</h3>
+
+<p>
+                An exploratory data analysis project studying FIFA 17 player
+                ratings, attributes, and performance patterns.
+              </p>
+            </div>
+
+<div class="project-footer">
+              <div class="tags">
+                <span>PYTHON</span>
+                <span>· ANALYSIS</span>
+                <span>· VISUALS</span>
+              </div>
+
+<a class="arrow" href="#contact" aria-label="Ask about FIFA project">
+                ↗
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+<section id="certificates">
+      <div class="container">
+        <div class="section-header">
+          <h2>Learning <span class="serif">archive.</span></h2>
+          <p>Courses and certifications completed along the way.</p>
+        </div>
+
+<div class="certificates">
+          <article class="certificate">
+            <div>
+              <h3>Python Essential 2</h3>
+              <p>CISCO NETWORKING ACADEMY · 25 FEB 2026</p>
+            </div>
+            <span class="certificate-icon">↗</span>
+          </article>
+
+<article class="certificate">
+            <div>
+              <h3>Python Essential 1</h3>
+              <p>CISCO NETWORKING ACADEMY · 24 FEB 2026</p>
+            </div>
+            <span class="certificate-icon">↗</span>
+          </article>
+
+<article class="certificate">
+            <div>
+              <h3>Networking Basics</h3>
+              <p>CISCO NETWORKING ACADEMY · 29 NOV 2025</p>
+            </div>
+            <span class="certificate-icon">↗</span>
+          </article>
+
+<article class="certificate">
+            <div>
+              <h3>Getting Started With Cisco Packet Tracer</h3>
+              <p>CISCO NETWORKING ACADEMY · 30 OCT 2025</p>
+            </div>
+            <span class="certificate-icon">↗</span>
+          </article>
+
+<article class="certificate">
+            <div>
+              <h3>C++ STL — Standard Template Library</h3>
+              <p>CERTIFICATE OF COMPLETION</p>
+            </div>
+            <span class="certificate-icon">↗</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+<section id="contact">
+      <div class="container">
+        <div class="contact">
+          <p class="mono">Have an idea?</p>
+
+<h2>
+            Let's make something
+            <span class="serif">useful.</span>
+          </h2>
+
+<div class="contact-links">
+            <a href="mailto:aryandixit0307@gmail.com">EMAIL ↗</a>
+
+<a
+              href="https://www.linkedin.com/in/aryan-dixit-3986a1327/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              LINKEDIN ↗
+            </a>
+
+<a
+              href="https://github.com/aryan-0307"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GITHUB ↗
+            </a>
+
+<a href="tel:+919818850587">CALL ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<footer>
+    <div class="container">
+      © <span id="year"></span> ANSH. DESIGNED AND BUILT WITH HTML, CSS & JS.
+    </div>
+  </footer>
+
+<script>
+    const menuButton = document.getElementById("menuButton");
+    const navLinks = document.getElementById("navLinks");
+
+menuButton.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+    });
+
+document.querySelectorAll(".nav-links a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+      });
+    });
+
+document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
